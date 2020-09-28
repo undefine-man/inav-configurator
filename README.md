@@ -1,149 +1,139 @@
-# INAV Configurator
+# INAV配置器
 
-INAV Configurator is a crossplatform configuration tool for the [INAV](https://github.com/iNavFlight/inav) flight control system.
+INAV Configurator是一款用于INAV飞行控制系统的跨平台配置工具。
 
-It runs as an app within Google Chrome and allows you to configure the INAV software running on any supported INAV target.
+它以应用程序的形式在谷歌浏览器中运行，允许您配置运行在任何支持的INAV目标上的INAV软件。
 
-Various types of aircraft are supported by the tool and by INAV, e.g. quadcopters, hexacopters, octocopters and fixed-wing aircraft.
+该工具和INAV支持各种类型的飞机，例如四翼飞机、六翼飞机、八翼飞机和固定翼飞机。
 
-## INAV Configurator start minimized, what should I do?
+## INAV配置器启动时最小化，我应该怎么做？
 
-You have to remove `C:\Users%Your_UserNname%\AppData\Local\inav-configurator` folder and all its content.
+你必须删除`C:\Users%Your_UserNname%\AppData\Local/inav-configurator`文件夹及其所有内容。
 
-[https://www.youtube.com/watch?v=XMoULyiFDp4](https://www.youtube.com/watch?v=XMoULyiFDp4)
+https://www.youtube.com/watch?v=XMoULyiFDp4
 
-Alternatively, on Windows with PowerShell you can use `post_install_cleanup.ps1` script that will do the cleaning. (thank you James Cherrill)
+或者，在Windows上使用PowerShell，你可以使用post_install_cleanup.ps1脚本来进行清理。(谢谢你James Cherrill)
 
-## Installation
+## 安装
 
-Depending on target operating system, _INAV Configurator_ is distributed as _standalone_ application or Chrome App.
+根据目标操作系统的不同，INAV Configurator以独立应用程序或Chrome应用程序的形式发布。
 
-### Windows
+#### Windows系统
 
-1. Visit [release page](https://github.com/iNavFlight/inav-configurator/releases)
-1. Download Configurator for Windows platform (win32 or win64 is present)
-1. Extract ZIP archive
-1. Run INAV Configurator app from unpacked folder
-1. Configurator is not signed, so you have to allow Windows to run untrusted application. There might be a monit for it during first run 
+1. 访问发布页面
+2. 下载Windows平台的配置器（win32或win64）。
+3. 解压ZIP档案
+4. 从解压后的文件夹中运行INAV Configurator应用程序。
+5. 配置器没有签名，所以你必须允许Windows运行不受信任的应用程序。第一次运行时可能会有一个提示。
 
-### Linux
+#### Linux
 
-1. Visit [release page](https://github.com/iNavFlight/inav-configurator/releases)
-1. Download Configurator for Linux platform (linux32 and linux64 are present)
-1. Extract tar.gz archive
-1. Make the inav-configurator file executable (chmod +x inav-configurator)
-1. Run INAV Configurator app from unpacked folder
+1. 访问发布页面
+2. 下载Linux平台的配置器(有linux32和linux64)
+3. 解压tar.gz文件
+4. 使inav-configurator文件可执行（chmod +x inav-configurator）。
+5. 从解压后的文件夹中运行INAV Configurator应用程序。
 
-### Mac
+#### Mac
 
-1. Visit [release page](https://github.com/iNavFlight/inav-configurator/releases)
-1. Download Configurator for Mac platform
-1. Extract ZIP archive
-1. Run INAV Configurator
-1. Configurator is not signed, so you have to allow Mac to run untrusted application. There might be a monit for it during first run 
+1. 访问发布页面
+2. 下载Mac平台的配置器
+3. 解压ZIP档案
+4. 运行INAV配置器
+5. 配置器没有签名，所以你必须允许Mac运行不受信任的应用程序。在第一次运行时，可能会有一个提示。
 
-### ChromeOS
+#### ChromeOS
 
-**INAV Configurator** form ChromeOS is available in [Chrome Web Store](https://chrome.google.com/webstore/detail/inav-configurator/fmaidjmgkdkpafmbnmigkpdnpdhopgel)
+###### INAV配置器形式的ChromeOS可在Chrome网络商店中使用。
 
-### Building and running INAV Configurator locally (for development or Linux users)
+##### 在本地构建和运行INAV配置器（针对开发或Linux用户）。
 
-For local development, **node.js** build system is used.
+本地开发时，使用node.js构建系统。
 
-1. Install node.js
-1. From project folder run `npm install`
-1. To build the JS and CSS files and start the configurator:
-    - With NW.js: Run `npm start`.
-    - With Chrome: Run `npm run gulp`. Then open `chrome://extensions`, enable
-    the `Developer mode`, click on the `Load unpacked extension...` button and select the `inav-configurator` directory.
+1. 安装node.js
 
-Other tasks are also defined in `gulpfile.js`. To run a task, use `./node_modules/gulp/bin/gulp.js task-name`. Available ones are:
+2. 从项目文件夹中运行`npm install`
 
-- **build**: Generate JS and CSS output files used by the configurator from their sources. It must be run whenever changes are made to any `.js` or `.css` files in order to have those changes appear
-in the configurator. If new files are added, they must be included in `gulpfile.js`. See the comments at the top of `gulpfile.js` to learn how to do so. See also the `watch` task.
-- **watch**: Watch JS and CSS sources for changes and run the `build` task whenever they're edited.
-- **dist**: Create a distribution of the app (valid for packaging both as a Chrome app or a NW.js app)
-in the `./dist/` directory.
-- **release**: Create NW.js apps for each supported platform (win32, osx64 and linux64) in the `./apps`
-directory. Running this task on macOS or Linux requires Wine, since it's needed to set the icon
-for the Windows app. If you don't have Wine installed you can create a release by running the **release-only-linux** task.
+3. 构建JS和CSS文件并启动配置器。
 
-## Different map providers
+   - 用NW. js： 运行`npm start`.
 
-INAV Configurator 2.1 allows to choose between OpenStreetMap, Bing Maps, and MapProxy map providers. 
-INAV Configurator is shipped **WITHOUT** API key for Bing Maps. That means: every user who wants to use Bing Maps has to create own account, agree to all _Terms and Conditions_ required by Bing Maps and configure INAV Configuerator by himself. 
+   - 在Chrome浏览器中：运行`npm start`。运行`npm run gulp`. 然后打开`chrome://extensions`，启用开发者模式，点击`Load unpacked extension...`按钮并选择inav-configurator目录。
 
-### How to choose Map provider
 
-1. Click **Settings** icon in the top-right corner of INAV Configurator
-1. Choose provider: OpenStreetMap, Bing, or MapProxy
-1. In the case of Bing Maps, you have to provide your own, personal, generated by you, Bing Maps API key
-1. For MapProxy, you need to provide a server URL and layer name to be used
+其他任务也在`gulpfile.js`中定义。要运行一个任务，使用`./node_modules/gulp/bin/gulp.js task-name`。可用的有
 
-### How to get Bing Maps API key
+- build：gulp.js 从其源头生成配置器使用的JS和CSS输出文件。每当对任何.js或.css文件进行更改时，必须运行它，以使这些更改出现在配置器中。如果添加了新文件，它们必须包含在gulpfile.js中。请参阅gulpfile.js顶部的注释来了解如何做到这一点。也请参见watch任务。
+- watch：观察JS和CSS源的变化，并在它们被编辑时运行构建任务。
+- dist：创建一个应用程序的发行版（有效）。在./dist/目录下创建应用程序的分发版（既可以打包成Chrome应用程序，也可以打包成NW.js应用程序）。
+- 发布：为每个支持的平台（win32、osx64和linux64）在./apps目录下创建NW.js应用。在macOS或Linux上运行这个任务需要Wine，因为需要它来设置Windows应用的图标。如果你没有安装Wine，你可以通过运行release-only-linux任务来创建一个版本。
 
-1. Go to the Bing Maps Dev Center at [https://www.bingmapsportal.com/](https://www.bingmapsportal.com/). 
-    * If you have a Bing Maps account, sign in with the Microsoft account that you used to create the account or create a new one. For new accounts, follow the instructions in [Creating a Bing Maps Account](https://msdn.microsoft.com/library/gg650598.aspx).
-1. Select **My keys** under **My Account**.
-1. Select the option to create a new key.
-1. Provide the following information to create a key:
-    1. Application name: Required. The name of the application.
-    1. Application URL: The URL of the application. This is an optional field which is useful in helping you remember the purpose of that key in the future.
-    1. Key type: Required. Select the key type that you want to create. You can find descriptions of key and application types here. 
-    1. Application type: Required. Select the application type that best represents the application that will use this key. You can find descriptions of key and application types [here](https://www.microsoft.com/maps/create-a-bing-maps-key.aspx). 
-1. Click the **Create** button. The new key displays in the list of available keys. Use this key to authenticate your Bing Maps application as described in the documentation for the Bing Maps API you are using.
+## 不同的地图提供商
 
-### How to setup a MapProxy server for offline caching and mission planning
-1. Follow process described in [MAPPROXY.md](MAPPROXY.md)
-1. Test your MapProxy server in web browser, eg: http://192.168.145.20/inavmapproxy/
-1. Once you have a working MapProxy server choose MapProxy as your map provider
-	1. Enter MapProxy service URL, eg: http://192.168.145.20/inavmapproxy/service?
-	1. Enter MapProxy service layer (inav_layer if configured from MAPPROXY.md)
-1. Once completed, you can zoom in on area you will be flying in while connected to the internet in either GPS or Mission Control tab to save the cache for offline use
+- INAV Configurator 2.1允许选择OpenStreetMap、Bing Maps和MapProxy地图提供商。INAV Configurator没有Bing Maps的API密钥。这意味着：每个想使用Bing地图的用户必须创建自己的账户，同意Bing地图要求的所有条款和条件，并自行配置INAV配置器。
 
-## Authors
 
-Konstantin Sharlaimov/DigitalEntity - maintainer of the INAV firmware and configurator.
+#### 如何选择地图提供商
 
-INAV Configurator was originally a [fork](#credits) of Cleanflight Configurator with support for INAV instead of Cleanflight.
+1. 点击INAV配置器右上角的设置图标。
+2. 选择提供者。OpenStreetMap、Bing或MapProxy。
+3. 在必应地图的情况下，你必须提供你自己的，个人的，由你生成的，必应地图的API密钥。
+4. 对于MapProxy来说，你需要提供一个服务器的URL和层名来使用
 
-This configurator is the only configurator with support for INAV specific features. It will likely require that you run the latest firmware on the flight controller.
-If you are experiencing any problems please make sure you are running the [latest firmware version](https://github.com/iNavFlight/inav/releases).
+#### 如何获得必应地图API密钥
 
-## Notes
+1. 转到必应地图开发中心https://www.bingmapsportal.com/。
+   - 如果您有必应地图账户，请使用您用来创建账户的Microsoft账户登录，或创建一个新账户。对于新账户，请按照创建必应地图账户中的说明进行操作。
+2. 选择 "我的帐户 "下的 "我的钥匙"。
+3. 选择创建新钥匙的选项。
+4. 提供以下信息来创建一个密钥。
+   1. 应用程序名称：Application name: Required. 应用程序的名称。
+   2. 应用程序的URL：应用程序的URL。这是一个可选字段，有助于你在将来记住该键的目的。
+   3. 密钥类型：必填。选择您要创建的密钥类型。你可以在这里找到密钥和应用程序类型的描述。
+   4. 应用类型：必填。选择最能代表将使用此密钥的应用程序的应用程序类型。您可以在这里找到密钥和应用程序类型的描述。
+5. 单击 "创建 "按钮。新密钥显示在可用密钥列表中。按照您正在使用的 Bing Maps API 文档中的描述，使用此密钥来验证您的 Bing Maps 应用程序。
+   如何设置MapProxy服务
 
-### WebGL
+## 作者
 
-Make sure Settings -> System -> "User hardware acceleration when available" is checked to achieve the best performance
+Konstantin Sharlaimov/DigitalEntity - INAV固件和配置器的维护者。
 
-### Linux users
+INAV配置器最初是Cleanflight配置器的一个分支，支持INAV而不是Cleanflight。
 
-1. Dont forget to add your user into dialout group "sudo usermod -aG dialout YOUR_USERNAME" for serial access
-2. If you have 3D model animation problems, enable "Override software rendering list" in Chrome flags chrome://flags/#ignore-gpu-blacklist
+这个配置器是唯一支持INAV特定功能的配置器。它可能需要您在飞行控制器上运行最新的固件。如果您遇到任何问题，请确保您运行的是最新的固件版本。
 
-## Support
+## 注意事项
 
-GitHub issue tracker is reserved for bugs and other technical problems. If you do not know how to setup
-everything, hardware is not working or have any other _support_ problem, please consult:
+#### WebGL
 
-* [rcgroups main thread](https://www.rcgroups.com/forums/showthread.php?2495732-Cleanflight-iNav-(navigation-rewrite)-project)
-* [Telegram Group](https://t.me/INAVFlight)
+确保设置->系统->"可用时的用户硬件加速 "被选中，以达到最佳性能。
 
-## Issue trackers
+##### Linux用户
 
-For INAV configurator issues raise them here
+1. 不要忘了将你的用户添加到拨号组 "sudo usermod -aG dialout YOUR_USERNAME "中，以便进行串行访问。
+2. 如果你有3D模型动画的问题，请在Chrome的flags中启用 "覆盖软件渲染列表 "chrome://flags/#ignore-gpu-blacklist。
+
+#### 支持
+
+GitHub问题跟踪器是为bug和其他技术问题保留的。如果您不知道如何设置所有的东西，硬件不工作或有任何其他支持问题，请咨询。
+
+- rcgroups主线
+- Telegram集团
+
+#### 问题跟踪器
+
+对于INAV配置器的问题，请在这里提出
 
 https://github.com/iNavFlight/inav-configurator/issues
 
-For INAV firmware issues raise them here
+对于INAV固件问题，请在这里提出
 
 https://github.com/iNavFlight/inav/issues
 
-## Developers
+#### 开发商
 
-We accept clean and reasonable patches, submit them!
+我们接受干净合理的补丁，请提交它们!
 
-## Credits
+#### 鸣谢
 
-ctn - primary author and maintainer of Baseflight Configurator.
-Hydra - author and maintainer of Cleanflight Configurator from which this project was forked.
+ctn - Baseflight Configurator的主要作者和维护者。Hydra - Cleanflight Configurator的作者和维护者，该项目是从Cleanflight Configurator分叉出来的。
